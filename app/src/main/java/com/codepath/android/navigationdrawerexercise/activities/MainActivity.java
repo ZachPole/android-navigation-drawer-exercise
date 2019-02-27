@@ -14,6 +14,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.codepath.android.navigationdrawerexercise.R;
 import com.codepath.android.navigationdrawerexercise.fragments.FamilyGuyFragment;
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Find the toolbar view inside the activity layout
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
@@ -45,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         drawerToggle = setupDrawerToggle();
         setupDrawerContent(nvDrawer);
+
+        nvDrawer.getMenu().getItem(0).setChecked(true);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, new SouthParkFragment()).commit();
+        setTitle(R.string.south_park);
     }
     
     private ActionBarDrawerToggle setupDrawerToggle(){
